@@ -2,30 +2,36 @@ class TbStreamer < Formula
   desc "PTY session management, WebSocket streaming, and REST API for Claude Code"
   homepage "https://github.com/RonenMars/threadbase-streamer"
   license "MIT"
-  version "1.2.1"
+  version "1.3.0"
 
   depends_on "node@22"
 
   on_macos do
     on_arm do
-      url "https://github.com/RonenMars/threadbase-streamer/releases/download/v1.2.1/threadbase-streamer-1.2.1-darwin-arm64.tgz"
-      sha256 "11631a11f92bade2e54eecfd7a37c8c3a6d2f9dd292a2d0b2e76d68b913c721e"
+      url "https://github.com/RonenMars/threadbase-streamer/releases/download/v1.3.0/threadbase-streamer-1.3.0-darwin-arm64.tgz"
+      sha256 "e7af7c6ecefa44c71d5e7a032f4ba9bed4c6e58aade7c9ae0efe5904a7c2605f"
     end
     on_intel do
-      url "https://github.com/RonenMars/threadbase-streamer/releases/download/v1.2.1/threadbase-streamer-1.2.1-darwin-x64.tgz"
-      sha256 "3b4af1d2a54c8d385d5f93c1a7c0ab34db7afacdeec30f725ee69f00690f8b91"
+      url "https://github.com/RonenMars/threadbase-streamer/releases/download/v1.3.0/threadbase-streamer-1.3.0-darwin-x64.tgz"
+      sha256 "2b06fae7dd121d7d73105133b6b4d8a0849f178f72053063b297c0435661825f"
     end
   end
 
   on_linux do
     on_intel do
-      url "https://github.com/RonenMars/threadbase-streamer/releases/download/v1.2.1/threadbase-streamer-1.2.1-linux-x64.tgz"
-      sha256 "5c0ebca4ea06ca62637533a5284783b649084ec7e0b62fb9d60fd9151973d5c0"
+      url "https://github.com/RonenMars/threadbase-streamer/releases/download/v1.3.0/threadbase-streamer-1.3.0-linux-x64.tgz"
+      sha256 "3bcfe552ff17a1315c0baf502a482624c9be4ef804dd60ae42e0c1f75a15886b"
     end
   end
 
   def install
     libexec.install Dir["*"]
+
+    # Stamp the runtime version next to dist/cli.cjs so getVersion() reports
+    # the formula's version (not whatever package.json says inside the tarball,
+    # which is frozen at the previous release because semantic-release bumps
+    # the version after the matrix has already packed the artifacts).
+    (libexec/"dist/version.txt").write("#{version}+brew\n")
 
     # All native deps that dist/cli.cjs requires at runtime (node-pty and
     # better-sqlite3) are pre-bundled in the tarball under node_modules/,
