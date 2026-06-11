@@ -2,25 +2,25 @@ class TbStreamer < Formula
   desc "PTY session management, WebSocket streaming, and REST API for Claude Code"
   homepage "https://github.com/RonenMars/threadbase-streamer"
   license "MIT"
-  version "1.6.2"
+  version "1.7.0"
 
   depends_on "node@22"
 
   on_macos do
     on_arm do
-      url "https://github.com/RonenMars/threadbase-streamer/releases/download/v1.6.2/threadbase-streamer-1.6.2-darwin-arm64.tgz"
-      sha256 "e7e3ba203367030df80130f5cbfe04d2f06a2c679907eebfc0181f50bedb5975"
+      url "https://github.com/RonenMars/threadbase-streamer/releases/download/v1.7.0/threadbase-streamer-1.7.0-darwin-arm64.tgz"
+      sha256 "f3cc9a9f612ead6c648f67eb83b0ecab427659f2c3ee6eb83b301c6dffec7ca2"
     end
     on_intel do
-      url "https://github.com/RonenMars/threadbase-streamer/releases/download/v1.6.2/threadbase-streamer-1.6.2-darwin-x64.tgz"
-      sha256 "59cf80e91296c0eeac83b49367a1411ea4db43acda7049eb7e6d677b06e88e17"
+      url "https://github.com/RonenMars/threadbase-streamer/releases/download/v1.7.0/threadbase-streamer-1.7.0-darwin-x64.tgz"
+      sha256 "561a06b228a0e59be48e1029b024dd01e0436a1d4897fd6b25e18b19be1a558f"
     end
   end
 
   on_linux do
     on_intel do
-      url "https://github.com/RonenMars/threadbase-streamer/releases/download/v1.6.2/threadbase-streamer-1.6.2-linux-x64.tgz"
-      sha256 "af95ac7a055efe56d7b5d63230c6438b3712c48fabc6363e7fcd0acb6b6c59cf"
+      url "https://github.com/RonenMars/threadbase-streamer/releases/download/v1.7.0/threadbase-streamer-1.7.0-linux-x64.tgz"
+      sha256 "27cab0f99f178d8c409ba638bfdb2e7b6d9c3f87f6d0538bff4de0528a6352e5"
     end
   end
 
