@@ -2,25 +2,25 @@ class TbStreamer < Formula
   desc "PTY session management, WebSocket streaming, and REST API for Claude Code"
   homepage "https://github.com/RonenMars/threadbase-streamer"
   license "MIT"
-  version "1.9.3"
+  version "1.10.0"
 
   depends_on "node@22"
 
   on_macos do
     on_arm do
-      url "https://github.com/RonenMars/threadbase-streamer/releases/download/v1.9.3/threadbase-streamer-1.9.3-darwin-arm64.tgz"
-      sha256 "1d1d23df736fea70615d85ade4f9bd71f7aff765492d731d3ca19f5c8788f5d1"
+      url "https://github.com/RonenMars/threadbase-streamer/releases/download/v1.10.0/threadbase-streamer-1.10.0-darwin-arm64.tgz"
+      sha256 "2cf41926cfcc3f0eca912538131f2b9afe571d3a13b89577eeb61edf0da2432a"
     end
     on_intel do
-      url "https://github.com/RonenMars/threadbase-streamer/releases/download/v1.9.3/threadbase-streamer-1.9.3-darwin-x64.tgz"
-      sha256 "1a0ca7e810ffe6f68cd53f43d00cee8d5a491cef176731697bfdb608bff8cebb"
+      url "https://github.com/RonenMars/threadbase-streamer/releases/download/v1.10.0/threadbase-streamer-1.10.0-darwin-x64.tgz"
+      sha256 "f002cec2bd6bd207cd2a8bd16f7f8727d35db42c7399f4eb11c529f2c90e0006"
     end
   end
 
   on_linux do
     on_intel do
-      url "https://github.com/RonenMars/threadbase-streamer/releases/download/v1.9.3/threadbase-streamer-1.9.3-linux-x64.tgz"
-      sha256 "af41f19c91335837b46317028bc3c97b3e76863a82815b49c7588c71193fca11"
+      url "https://github.com/RonenMars/threadbase-streamer/releases/download/v1.10.0/threadbase-streamer-1.10.0-linux-x64.tgz"
+      sha256 "7efd3c1934f8a58d5d4376b8da0def5b6dfce52d89f0f9b087a2af453296b538"
     end
   end
 
@@ -41,11 +41,15 @@ class TbStreamer < Formula
   end
 
   service do
-    run [opt_bin/"tb-streamer", "serve", "--port", "8766"]
+    run [opt_bin/"tb-streamer", "serve", "--port", "8766", "--prod"]
     keep_alive true
     log_path       var/"log/tb-streamer.log"
     error_log_path var/"log/tb-streamer.err"
-    environment_variables PATH: std_service_path_env
+    # Prepend Homebrew's bin so node-pty's execvp("claude", …) resolves
+    # /opt/homebrew/bin/claude (Apple Silicon) — std_service_path_env omits it.
+    # resolveClaudeExe() in src/platform.ts has an absolute fallback too, so
+    # this is defense-in-depth.
+    environment_variables PATH: "#{HOMEBREW_PREFIX}/bin:#{std_service_path_env}"
   end
 
   def caveats
@@ -58,13 +62,13 @@ class TbStreamer < Formula
         2. Start the service (also starts on login):
            brew services start tb-streamer
 
-        3. (Optional) Enable automatic updates:
-           tb-streamer update --enable-auto-update
+        3. To update later:
+           brew upgrade tb-streamer
 
       Note: Homebrew install is mutually exclusive with the
       manual scripts/deploy.sh install. If you previously
       installed via that path, run:
-        launchctl bootout gui/$UID/com.threadbase.streamer
+        launchctl bootout gui/$UID/com.ronen.threadbase
       before starting the Homebrew service.
     EOS
   end
