@@ -2,25 +2,25 @@ class TbStreamer < Formula
   desc "PTY session management, WebSocket streaming, and REST API for Claude Code"
   homepage "https://github.com/RonenMars/threadbase-streamer"
   license "MIT"
-  version "1.101.13"
+  version "1.101.14"
 
   depends_on "node@22"
 
   on_macos do
     on_arm do
-      url "https://github.com/RonenMars/threadbase-streamer/releases/download/v1.101.13/threadbase-streamer-1.101.13-darwin-arm64.tgz"
-      sha256 "49df5d0a74b35ab15eabca3adbe2adde7dde31ebde5b5717e5a45a2e11cc4076"
+      url "https://github.com/RonenMars/threadbase-streamer/releases/download/v1.101.14/threadbase-streamer-1.101.14-darwin-arm64.tgz"
+      sha256 "128e7e2fb4478a3bec8a086e1c350ec8fcce9aad5b8bf68ad0b790ad266b5084"
     end
     on_intel do
-      url "https://github.com/RonenMars/threadbase-streamer/releases/download/v1.101.13/threadbase-streamer-1.101.13-darwin-x64.tgz"
-      sha256 "a4fface167ad32385716a39bc4fffec0b35c37bde9035fa67c81a94814fc6264"
+      url "https://github.com/RonenMars/threadbase-streamer/releases/download/v1.101.14/threadbase-streamer-1.101.14-darwin-x64.tgz"
+      sha256 "dbdccba29f70a129b4874ec42ade9a36c13faa2ca6c5a8f87486a60863ad898d"
     end
   end
 
   on_linux do
     on_intel do
-      url "https://github.com/RonenMars/threadbase-streamer/releases/download/v1.101.13/threadbase-streamer-1.101.13-linux-x64.tgz"
-      sha256 "2ec0813c12600e9a16a32094509f9b5d80f46982a9c57679063bea29a3bb8d52"
+      url "https://github.com/RonenMars/threadbase-streamer/releases/download/v1.101.14/threadbase-streamer-1.101.14-linux-x64.tgz"
+      sha256 "7470b984dcb185c40cf21a8e3e1b5b2dc2b9a7f503e686a43d4b7c7cb8cc50fb"
     end
   end
 
